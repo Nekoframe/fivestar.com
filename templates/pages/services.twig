@@ -1,0 +1,59 @@
+{% extends "layout" %}
+
+{% block content %}
+
+    <!-- landing__service -->
+	<div class="container landing__service">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="landing__header">
+					<h1 class="landing__title">{{ entry.title }}</h1>
+					<hr>
+				</div>
+				<div class="container-fluid px-0">
+					<div class="row">
+						<div class="col-lg-12">
+							<h1 class="service__title">
+                                {% if entry.heading is defined and entry.heading != ''%}
+                                    {{ entry.heading }}
+                                {% endif %}
+                            </h1>
+							<div class="service__description">
+                                {% if entry.summary is defined and entry.summary != ''%}
+                                    {{ entry.summary }}
+                                {% endif %}
+                            </div>
+						</div>
+					</div>
+
+                    <div class="row">
+                        {% include "feature-components" %}
+                    </div>
+
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<figure>
+                    {% if entry.image.one is defined and entry.image.one != '' %}
+                        <img src="{{ entry.image.one.getUrl('portrait') }}" alt="{{ entry.image.one }}" class="img-fluid service__image">
+                    {% else %}
+                        No image to display
+                    {% endif %}
+                </figure>
+			</div>
+			
+		</div>
+
+
+		<!-- service__list -->
+		<ul class="service__list">
+
+        {% include "service-components" %}
+
+		</ul>
+		<!-- end service__list -->
+	</div>
+	<!-- end landing__service -->
+
+{% endblock %}
+

@@ -1,0 +1,55 @@
+{% if entry.blockService is defined and entry.blockService != '' %}
+	{# Block Service Components #}
+	{% for block in entry.blockService.all() %}
+
+		{# Service #}
+		{% if block.type == "service" %}
+
+			<li class="container-fluid">
+				<div class="row">
+
+
+				{% if block.imagePosition == 'left' %}
+					<div class="col-lg-6 service__photo">
+						{% if block.serviceImage.one is defined and block.serviceImage.one != '' %}
+							<img class="img-fluid" src="{{ block.serviceImage.one.getUrl('landscape') }}" alt="{{ block.serviceImage.one }}">
+						{% else %}
+							No image to display
+						{% endif %}
+					</div>
+					<div class="col-lg-6 service__content">
+						<div class="service__detail">
+							<h1 class="service__name">{{ block.serviceTitle }}</h1>
+							{{ block.serviceDescription }}
+						</div>
+					</div>
+				{% endif %}
+
+				{% if block.imagePosition == 'right' %}
+					<div class="col-lg-6 service__content">
+						<div class="service__detail">
+							<h1 class="service__name">{{ block.serviceTitle }}</h1>
+							{{ block.serviceDescription }}
+						</div>
+					</div>
+					<div class="col-lg-6 service__photo">
+						{% if block.serviceImage.one is defined and block.serviceImage.one != '' %}
+							<img class="img-fluid" src="{{ block.serviceImage.one.getUrl('landscape') }}" alt="{{ block.serviceImage.one }}">
+						{% else %}
+							No image to display
+						{% endif %}
+					</div>
+				{% endif %}
+
+
+
+
+
+					
+				</div>
+			</li>
+
+		{% endif %}
+
+	{% endfor %}
+{% endif %}

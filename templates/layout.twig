@@ -1,0 +1,42 @@
+{# default layout skeleton including bricks #}
+
+{% include "bricks/header-doc" %}
+
+<body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-52WGT68"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    {# Get page name then define class for main and header #}
+    {% set pageName = craft.app.request.segments|first %}
+
+    {% if pageName == 'services' %}
+        {% set headerClass = 'header--dark' %}
+        {% set mainClass = 'main--space-top' %}
+
+    {% elseif pageName == 'galleries' %}
+        {% set headerClass = 'header--dark' %}
+        {% set mainClass = 'main--space-top' %}
+
+    {% else %}
+        {% set headerClass = '' %}
+
+    {% endif %}
+
+	{% include "bricks/header-page" %}
+
+    <main id="content" {% if mainClass is defined and mainClass != '' %}class="{{ mainClass }}"{% endif %}>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    
+    {% include "bricks/footer-content" %}
+
+    {% include "bricks/footer-scripts" %}
+
+</body>
+</html>

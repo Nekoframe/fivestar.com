@@ -1,0 +1,13 @@
+{% nav node in craft.entries.section("navigation").level(1).all() %}
+    {% set navigationLink = node.navLink.one() %}
+
+    {% if navigationLink is defined and navigationLink != "" %}
+        {% set navigationLinkUrl = navigationLink.getUrl() %}
+    {% else %}
+        {% set navigationLinkUrl = '' %}
+    {% endif %}
+
+    <li class="nav-item {% if entry.uri == craft.app.request.segments|first() %}active{% endif %}">
+        <a class="nav-link nav__list__link" href="{{ navigationLinkUrl }}">{{ node.title }}</a>
+    </li>
+{% endnav %}

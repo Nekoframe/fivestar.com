@@ -1,0 +1,24 @@
+{% if entry.blockFeature is defined and entry.blockFeature != '' %}
+	{# Block Feature Components #}
+	{% for block in entry.blockFeature.all() %}
+
+		{# Feature #}
+		{% if block.type == "feature" %}
+
+            <div class="col-lg-6 col-md-6 service__icon">
+                {% if block.featureIcon.one is defined and block.featureIcon.one != '' %}
+                    <div class="icon">
+                        <img src="{{ block.featureIcon.one.getUrl('icon') }}" alt="{{ block.featureIcon.one }}">
+                    </div>
+                {% else %}
+					No image to display
+                {% endif %}
+
+                <span>{{ block.featureTitle }}</span>
+
+            </div>
+
+		{% endif %}
+
+	{% endfor %}
+{% endif %}
