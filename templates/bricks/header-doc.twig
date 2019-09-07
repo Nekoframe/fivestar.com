@@ -19,11 +19,9 @@
 
 		{# JS #}
 		{# Google reCaptcha #}
-		{# <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script> #}
-		{# <script src="https://www.google.com/recaptcha/api.js" async defer></script> #}
 		<script type="text/javascript">
 		var onloadCallback = function() {
-			grecaptcha.render('html_element', {
+			grecaptcha.render('captcha', {
 			'sitekey' : '6LdS77YUAAAAAKHP11zbTs2WaAPHDZrlv6ez00hf'
 			});
 		};

@@ -15,13 +15,25 @@
         <div class="bubble x10"></div>
     </div>
 
+	{% if entry.banner.one is defined and entry.banner.one != '' %}
+		{% set banner = entry.banner.one.getUrl('banner') %}
+	{% else %}
+		{% set banner = globals.defaultImage.one.getUrl('banner') %}
+	{% endif %}
+
     <!-- banner -->
-	<section class="banner" style="background-image: url('{{ entry.banner.one.getUrl("banner") }}');">
+	<section class="banner" {% if banner is defined and banner != '' %}style="background-image: url('{{ banner }}')"{% endif %}>
 		<div class="banner--overlay"></div>
 
 		<div class="banner__text">
+		{% if entry.bannerSubtitle is defined and entry.bannerSubtitle != '' %}
 			<h3>{{ entry.bannerSubtitle }}</h3>
+		{% endif %}
+
+		{% if entry.bannerTitle is defined and entry.bannerTitle != '' %}
 			<h1>{{ entry.bannerTitle }}</h1>
+		{% endif %}
+			
 		</div>
 	</section>
 	<!-- end banner -->
