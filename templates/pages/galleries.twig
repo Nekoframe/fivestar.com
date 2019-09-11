@@ -1,0 +1,83 @@
+{% extends "layout" %}
+
+{% block content %}
+
+    {% include "bricks/modal" %}
+
+    <div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="landing__header">
+					<h1 class="landing__title">{{ entry.title }}</h1>
+					<hr>
+				</div>
+			</div>
+
+			<div class="col-lg-12">
+				<div class="isotope button-group filters-button-group d-none d-lg-flex">
+					{# <button class="btn btn--auto-size btn--dark-transparent active" data-filter="*">All Bathrooms</button>
+					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".minimal">Minimal Design</button>
+					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".cozy">Cozy Bathrooms</button>
+					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".luxury">Luxury</button>
+					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".wooden">Wooden Style</button>
+					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".small">Small Bathrooms</button> #}
+                    {% for category in craft.entries.section("galleryNavigation").level(1).all() %}
+                        {% if loop.index == 1 %}
+                            <button class="btn btn--auto-size btn--dark-transparent" data-filter="*">{{ category }}</button>
+
+                        {% else %}
+                            <button class="btn btn--auto-size btn--dark-transparent" data-filter=".{{ category|split(' ')|slice(0, 1)|join|lower }}">{{ category }}</button>
+
+                        {% endif %}
+                    {% endfor %}
+				</div>
+
+				<div class="isotope--mobile d-block d-lg-none">
+					<select class="filters-select">
+						{# <option value="*" selected>All Bathrooms</option>
+						<option value=".minimal">Minimal Design</option>
+						<option value=".cozy">Cozy Bathrooms</option>
+						<option value=".luxury">Luxury</option>
+						<option value=".wooden">Wooden Style</option>
+						<option value=".small">Small Bathrooms</option> #}
+                        {% for category in craft.entries.section("galleryNavigation").level(1).all() %}
+                            {% if loop.index == 1 %}
+                                <option value="*" selected>{{ category }}</option>
+
+                            {% else %}
+                                <option value=".{{ category|split(' ')|slice(0, 1)|join|lower }}">{{ category }}</option>
+
+                            {% endif %}
+                        {% endfor %}
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- galleries -->
+	<section class="galleries">
+		<div class="container-fluid px-0">
+			<div class="row no-gutters grid">
+
+
+                {% for gallery in craft.entries.section("galleryList").all() %}
+
+                <div class="col-md-6 col-lg-4 gallery-item {{ gallery.galleryCategory }}">
+					<a href="#!" class="gallery__image" data-toggle="modal" data-target="#gallery">
+						<div class="gallery__caption">
+							<h3>{{ gallery.galleryCategory.label }}</h3>
+						</div>
+						<div class="gallery--image-into-bg" style="background-image: url({{ gallery.images.one.getUrl('landscape') }})"></div>
+					</a>
+				</div>
+
+                {% endfor %}
+				
+
+			</div>
+		</div>
+	</section>
+	<!-- end galleries -->
+
+{% endblock %}

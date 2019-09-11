@@ -35,7 +35,7 @@
 			<div class="col-lg-4">
 				<figure>
                     {% if entry.image.one is defined and entry.image.one != '' %}
-                        <img src="{{ entry.image.one.getUrl('portrait') }}" alt="{{ entry.image.one }}" class="img-fluid service__image">
+                        <img src="{{ entry.image.one.getUrl('portrait') }}" class="img-fluid service__image" alt="{{ entry.image.one }}">
                     {% else %}
                         No image to display
                     {% endif %}
