@@ -15,12 +15,6 @@
 
 			<div class="col-lg-12">
 				<div class="isotope button-group filters-button-group d-none d-lg-flex">
-					{# <button class="btn btn--auto-size btn--dark-transparent active" data-filter="*">All Bathrooms</button>
-					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".minimal">Minimal Design</button>
-					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".cozy">Cozy Bathrooms</button>
-					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".luxury">Luxury</button>
-					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".wooden">Wooden Style</button>
-					<button class="btn btn--auto-size btn--dark-transparent" data-filter=".small">Small Bathrooms</button> #}
                     {% for category in craft.entries.section("galleryNavigation").level(1).all() %}
                         {% if loop.index == 1 %}
                             <button class="btn btn--auto-size btn--dark-transparent" data-filter="*">{{ category }}</button>
@@ -34,12 +28,6 @@
 
 				<div class="isotope--mobile d-block d-lg-none">
 					<select class="filters-select">
-						{# <option value="*" selected>All Bathrooms</option>
-						<option value=".minimal">Minimal Design</option>
-						<option value=".cozy">Cozy Bathrooms</option>
-						<option value=".luxury">Luxury</option>
-						<option value=".wooden">Wooden Style</option>
-						<option value=".small">Small Bathrooms</option> #}
                         {% for category in craft.entries.section("galleryNavigation").level(1).all() %}
                             {% if loop.index == 1 %}
                                 <option value="*" selected>{{ category }}</option>
@@ -64,20 +52,21 @@
                 {% for gallery in craft.entries.section("galleryList").all() %}
 
                 <div class="col-md-6 col-lg-4 gallery-item {{ gallery.galleryCategory }}">
-					<a href="#!" class="gallery__image" data-toggle="modal" data-target="#gallery">
+					<a href="#" class="gallery__image btn-modal-gallery" data-toggle="modal" data-target="#gallery{{ gallery.id }}">
 						<div class="gallery__caption">
-							<h3>{{ gallery.galleryCategory.label }}</h3>
+							<h3>{{ gallery.title }}</h3>
 						</div>
-						<div class="gallery--image-into-bg" style="background-image: url({{ gallery.images.one.getUrl('landscape') }})"></div>
+						<div class="gallery--image-into-bg" style="background-image: url({{ gallery.images.one.getUrl('landscape') }})" alt="{{ gallery.galleryCategory.label }} - {{ gallery.title }}"></div>
 					</a>
 				</div>
 
                 {% endfor %}
 				
-
 			</div>
 		</div>
 	</section>
 	<!-- end galleries -->
 
 {% endblock %}
+
+

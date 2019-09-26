@@ -1,4 +1,4 @@
-
+// Header menu hover
 $('.nav__list .nav__list__link').on("mouseover", function(){
     $('.nav__list .nav__list__link').addClass('not--hover');
     $(this).removeClass('not--hover');
@@ -43,7 +43,7 @@ $('a[href*="#"]')
 // Remove links that don't actually link to anything
 .not('[href="#"]')
 .not('[href="#0"]')
-.not('[href="#album01"]')
+.not('a[href*="#image-slide"]')
 .click(function(event) {
   // On-page links
   if (
@@ -94,44 +94,70 @@ $(window).scroll(function (event) {
 var $grid = $('.grid').isotope({
     itemSelector: '.gallery-item',
     layoutMode: 'fitRows'
+});
+
+// filter functions
+var filterFns = {
+  // show if number is greater than 50
+  numberGreaterThan50: function() {
+    var number = $(this).find('.number').text();
+    return parseInt( number, 10 ) > 50;
+  },
+};
+
+
+// bind filter button click
+$('.filters-button-group').on( 'click', 'button', function() {
+  var filterValue = $( this ).attr('data-filter');
+  // use filterFn if matches value
+  filterValue = filterFns[ filterValue ] || filterValue;
+  $grid.isotope({ filter: filterValue });
+});
+
+
+// change active class on buttons
+$('.button-group').each( function( i, buttonGroup ) {
+  var $buttonGroup = $( buttonGroup );
+  $buttonGroup.on( 'click', 'button', function() {
+    $buttonGroup.find('.active').removeClass('active');
+    $( this ).addClass('active');
   });
-
-  // filter functions
-  var filterFns = {
-    // show if number is greater than 50
-    numberGreaterThan50: function() {
-      var number = $(this).find('.number').text();
-      return parseInt( number, 10 ) > 50;
-    },
-  };
+});
 
 
-  // bind filter button click
-  $('.filters-button-group').on( 'click', 'button', function() {
-    var filterValue = $( this ).attr('data-filter');
-    // use filterFn if matches value
-    filterValue = filterFns[ filterValue ] || filterValue;
-    $grid.isotope({ filter: filterValue });
-  });
+// bind filter on select change
+$('.filters-select').on( 'change', function() {
+  // get filter value from option value
+  var filterValue = this.value;
+  // use filterFn if matches value
+  filterValue = filterFns[ filterValue ] || filterValue;
+  $grid.isotope({ filter: filterValue });
+});
 
 
-  // change active class on buttons
-  $('.button-group').each( function( i, buttonGroup ) {
-    var $buttonGroup = $( buttonGroup );
-    $buttonGroup.on( 'click', 'button', function() {
-      $buttonGroup.find('.active').removeClass('active');
-      $( this ).addClass('active');
-    });
-  });
+// Gallery modal
 
 
-  // bind filter on select change
-  $('.filters-select').on( 'change', function() {
-    // get filter value from option value
-    var filterValue = this.value;
-    // use filterFn if matches value
-    filterValue = filterFns[ filterValue ] || filterValue;
-    $grid.isotope({ filter: filterValue });
-  });
+
+$('.btn-modal-gallery').on("click", function(e){
+  e.preventDefault();
+  var target = $(this).attr("data-target");
+  
+  //alert(target);
+
+    // $('.gallery__modal'+ target).modal({
+
+    // });
+
+    // $('.gallery__modal').hide();
+
+    // $('.gallery__modal'+ target).show();
+
+    // $('.gallery__modal'+ target).modal({
+
+    // });
+    
 
 
+
+});
