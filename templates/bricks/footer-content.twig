@@ -2,7 +2,7 @@
 	<a class="nav--top__link" href="#top"><i class="fas fa-chevron-up fa-2x"></i></a>
 </div>
 <footer>
-	<p class="footer__copyright">Copyright <i class="far fa-copyright"></i> {{ now.year }} {{ contacts.businessName }}.</p>
+	<p class="footer__copyright">Copyright <i class="far fa-copyright"></i> {{ now|date('Y') }} {{ contacts.businessName }}.</p>
 	<p class="footer__copyright">Designed by <a href="http://zbframe.com" target="_blank">ZBframe</a>.</p>
 </footer>
 
