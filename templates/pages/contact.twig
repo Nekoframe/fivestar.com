@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <!-- landing__contact -->
+    {# landing__contact #}
 	<div class="landing__contact">
 		<div class="container">
 			<div class="row">
@@ -31,40 +31,43 @@
 				</div>
 
 				<div class="col-lg-6">
-					<form class="contact__form" action=" ">
+					<form class="contact__form" method="post" accept-charset="UTF-8" data-toggle="validator" role="form">
+						{{ csrfInput() }}
+						<input type="hidden" name="action" value="core/default/sendcontactform">
+
 						<div class="form-row">
 							<div class="form-group col-md-6">
 							    <label for="name">Name</label>
-							    <input type="text" class="form-control" id="name" placeholder="Name">
+							    <input type="text" class="form-control" name="message[name]" id="name" placeholder="Name">
 						    </div>
 						    <div class="form-group col-md-6">
 							    <label for="last_name">Last name</label>
-							    <input type="text" class="form-control" id="last_name" placeholder="Last name">
+							    <input type="text" class="form-control" name="message[lastname]" id="last_name" placeholder="Last name">
 						    </div>
 					    </div>
 
 					    <div class="form-row">
 							<div class="form-group col-md-6">
 							    <label for="email">Email</label>
-							    <input type="email" class="form-control" id="email" placeholder="example@email.co.uk">
+							    <input type="email" class="form-control" name="message[email]" id="email" placeholder="example@email.co.uk">
 						    </div>
 						    <div class="form-group col-md-6">
 							    <label for="phone">Phone</label>
-							    <input type="number" class="form-control" id="phone" placeholder="0xxxxxxxxxx">
+							    <input type="number" class="form-control" name="message[phone]" id="phone" placeholder="0xxxxxxxxxx">
 						    </div>
 					    </div>
 
 						<div class="form-row">
 							<div class="form-group col-md-12">
 							    <label for="topic">Topic</label>
-							    <input type="text" class="form-control" id="topic">
+							    <input type="text" class="form-control" name="message[topic]" id="topic">
 						    </div>
 						</div>
 
 					    <div class="form-row">
 							<div class="form-group col-md-12">
 							    <label for="message">Message</label>
-							    <textarea class="form-control" id="message" rows="3"></textarea>
+							    <textarea class="form-control" name="message[body]" id="message" rows="3"></textarea>
 							</div>
 					    </div>
 
@@ -82,6 +85,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- end landing__contact -->
+	{# end landing__contact #}
 
 {% endblock %}

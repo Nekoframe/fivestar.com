@@ -1,5 +1,4 @@
 {# Modal #}
-
 {% for gallery in craft.entries.section("galleryList").all() %}
 
 <div class="modal fade gallery__modal" id="gallery{{ gallery.id }}" tabindex="-1" role="dialog" aria-labelledby="gallery" aria-hidden="true">
@@ -12,7 +11,6 @@
         </button>
       </div>
       <div class="modal-body gallery__modal_content">
-        
 
         <div id="image-slide{{ gallery.id }}" class="carousel slide" data-ride="carousel">
 		  <div class="carousel-inner">

@@ -136,28 +136,7 @@ $('.filters-select').on( 'change', function() {
 
 
 // Gallery modal
-
-
-
-$('.btn-modal-gallery').on("click", function(e){
-  e.preventDefault();
-  var target = $(this).attr("data-target");
-  
-  //alert(target);
-
-    // $('.gallery__modal'+ target).modal({
-
-    // });
-
-    // $('.gallery__modal').hide();
-
-    // $('.gallery__modal'+ target).show();
-
-    // $('.gallery__modal'+ target).modal({
-
-    // });
-    
-
-
-
-});
+// $('.btn-modal-gallery').on("click", function(e){
+//   e.preventDefault();
+//   var target = $(this).attr("data-target");
+// });

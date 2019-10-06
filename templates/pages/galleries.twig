@@ -43,11 +43,10 @@
 		</div>
 	</div>
 
-	<!-- galleries -->
+	{# galleries #}
 	<section class="galleries">
 		<div class="container-fluid px-0">
 			<div class="row no-gutters grid">
-
 
                 {% for gallery in craft.entries.section("galleryList").all() %}
 
@@ -65,7 +64,7 @@
 			</div>
 		</div>
 	</section>
-	<!-- end galleries -->
+	{# end galleries #}
 
 {% endblock %}
 
