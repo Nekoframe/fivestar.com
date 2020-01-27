@@ -1,40 +1,84 @@
 // Header menu hover
-$('.nav__list .nav__list__link').on("mouseover", function(){
+function menuHover () {
+  $('.nav__list .nav__list__link').on("mouseover", function(){
     $('.nav__list .nav__list__link').addClass('not--hover');
     $(this).removeClass('not--hover');
     $(this).addClass('hover');
-});
+  });
 
-$('.nav__list .nav__list__link').on("mouseleave", function(){
-    $('.nav__list .nav__list__link').removeClass('hover');
-    $('.nav__list .nav__list__link').removeClass('not--hover');
-});
+  $('.nav__list .nav__list__link').on("mouseleave", function(){
+      $('.nav__list .nav__list__link').removeClass('hover');
+      $('.nav__list .nav__list__link').removeClass('not--hover');
+  });
+}
 
+// Show/Hide nav top button
+function scrollTop () {
+  $(window).scroll(function (event) {
+    var scroll = $(window).scrollTop();
+    if (scroll > 200) {
+        $('.nav--top').addClass('active');
+    }
+    else{
+        $('.nav--top').removeClass('active');
+    }
+  });
+}
 
 // Owl carousel
-$(document).ready(function(){
-    $("#testimonial__carousel").owlCarousel({
-        autoPlay: 3000,
-        loop: true,
-      margin: 30,
-      item: 3,
-      // responsiveClass: true,
-      responsive:{
-          0:{
-              items: 1,
-              dots: true
-          },
-          768:{
-              items: 2,
-              dots: true
-          },
-          1000:{
-              items: 3,
-              dots: true
-          }
+function carousel () {
+    $(document).ready(function(){
+      $("#testimonial__carousel").owlCarousel({
+          autoPlay: 3000,
+          loop: true,
+        margin: 30,
+        item: 3,
+        // responsiveClass: true,
+        responsive:{
+            0:{
+                items: 1,
+                dots: true
+            },
+            768:{
+                items: 2,
+                dots: true
+            },
+            1000:{
+                items: 3,
+                dots: true
+            }
+        }
+      });
+  });
+}
+
+
+// Gallery filter
+function galleryFilter () {
+  // check if the button is click
+  $('.filters-button-group button').on('click', function(){
+    var button = $(this).data('filter');
+
+    // show all album
+    $('.gallery-item').show();
+
+    // set album = .gallery-item
+    var album = $('.gallery-item');
+
+    $.each(album, function (index, value) {
+
+      // Break the loop if click button all
+      if(button == 'all'){
+        return;
+      }
+
+      // hide all album that is not selected
+      if ($(value).data('category') != button) {
+        $(value).hide();
       }
     });
-});
+  });
+}
 
 
 // Smooth Scrolling
@@ -77,66 +121,20 @@ $('a[href*="#"]')
 });
 
 
-// Show/Hide nav top button
-$(window).scroll(function (event) {
-    var scroll = $(window).scrollTop();
-    if (scroll > 200) {
-        $('.nav--top').addClass('active');
-    }
-    else{
-        $('.nav--top').removeClass('active');
-    }
-});
+$(function () {
+  if($('.nav--top').length > 0) {
+    scrollTop();
+  }
 
+  if($('.nav__list').length > 0) {
+    menuHover();
+  }
 
-// Isotope Gallery
-// init Isotope
-var $grid = $('.grid').isotope({
-    itemSelector: '.gallery-item',
-    layoutMode: 'fitRows'
-});
+  if($('#testimonial__carousel').length > 0) {
+    carousel();
+  }
 
-// filter functions
-var filterFns = {
-  // show if number is greater than 50
-  numberGreaterThan50: function() {
-    var number = $(this).find('.number').text();
-    return parseInt( number, 10 ) > 50;
-  },
-};
-
-
-// bind filter button click
-$('.filters-button-group').on( 'click', 'button', function() {
-  var filterValue = $( this ).attr('data-filter');
-  // use filterFn if matches value
-  filterValue = filterFns[ filterValue ] || filterValue;
-  $grid.isotope({ filter: filterValue });
-});
-
-
-// change active class on buttons
-$('.button-group').each( function( i, buttonGroup ) {
-  var $buttonGroup = $( buttonGroup );
-  $buttonGroup.on( 'click', 'button', function() {
-    $buttonGroup.find('.active').removeClass('active');
-    $( this ).addClass('active');
-  });
-});
-
-
-// bind filter on select change
-$('.filters-select').on( 'change', function() {
-  // get filter value from option value
-  var filterValue = this.value;
-  // use filterFn if matches value
-  filterValue = filterFns[ filterValue ] || filterValue;
-  $grid.isotope({ filter: filterValue });
-});
-
-
-// Gallery modal
-// $('.btn-modal-gallery').on("click", function(e){
-//   e.preventDefault();
-//   var target = $(this).attr("data-target");
-// });
+  if($('.gallery-item').length > 0) {
+    galleryFilter();
+  }
+})

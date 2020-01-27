@@ -17,10 +17,10 @@
 				<div class="isotope button-group filters-button-group d-none d-lg-flex">
                     {% for category in craft.entries.section("galleryNavigation").level(1).all() %}
                         {% if loop.index == 1 %}
-                            <button class="btn btn--auto-size btn--dark-transparent" data-filter="*">{{ category }}</button>
+                            <button class="btn btn--auto-size btn--dark-transparent" data-filter="all">{{ category }}</button>
 
                         {% else %}
-                            <button class="btn btn--auto-size btn--dark-transparent" data-filter=".{{ category|split(' ')|slice(0, 1)|join|lower }}">{{ category }}</button>
+                            <button class="btn btn--auto-size btn--dark-transparent" data-filter="{{ category|split(' ')|slice(0, 1)|join|lower }}">{{ category }}</button>
 
                         {% endif %}
                     {% endfor %}
@@ -50,7 +50,7 @@
 
                 {% for gallery in craft.entries.section("galleryList").all() %}
 
-                <div class="col-md-6 col-lg-4 gallery-item {{ gallery.galleryCategory }}">
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="{{ gallery.galleryCategory }}">
 					<a href="#" class="gallery__image btn-modal-gallery" data-toggle="modal" data-target="#gallery{{ gallery.id }}">
 						<div class="gallery__caption">
 							<h3>{{ gallery.title }}</h3>
